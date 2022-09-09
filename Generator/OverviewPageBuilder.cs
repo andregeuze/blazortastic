@@ -7,34 +7,33 @@ namespace Generator
     internal class OverviewPageBuilder : Builder
     {
         internal override string Type => "Overview";
-
-        internal override void GenerateRazor(ClassDeclarationSyntax classDeclaration, IndentedStringBuilder builder)
+        
+        internal override void GenerateCodeBehind(ClassDeclarationSyntax classDeclaration, IndentedStringBuilder builder)
         {
-            NamespaceDeclarationSyntax namespaceDeclarationSyntax = null;
-            if (!SyntaxNodeHelper.TryGetParentSyntax(classDeclaration, out namespaceDeclarationSyntax))
-            {
-                return; // or whatever you want to do in this scenario
-            }
+                NamespaceDeclarationSyntax namespaceDeclarationSyntax = null;
+                if (!SyntaxNodeHelper.TryGetParentSyntax(classDeclaration, out namespaceDeclarationSyntax))
+                {
+                    return; // or whatever you want to do in this scenario
+                }
 
-            var identifierOfClass = classDeclaration.Identifier.Value;
+                var identifierOfClass = classDeclaration.Identifier.Value;
 
-            builder
-                .AppendLine($"using GeneratorHelper;")
-                .AppendLine($"using Microsoft.AspNetCore.Components;").AppendLine()
-                .AppendLine($"namespace {namespaceDeclarationSyntax.Name};").AppendLine()
-                //.AppendLine($"using {namespaceDeclarationSyntax.Name};")
-                .AppendLine($"public partial class {identifierOfClass}Component_g")
-                .AppendLine("{");
+                builder
+                    .AppendLine($"using GeneratorHelper;")
+                    .AppendLine($"using Microsoft.AspNetCore.Components;").AppendLine()
+                    .AppendLine($"namespace {namespaceDeclarationSyntax.Name};").AppendLine()
+                    .AppendLine($"public partial class {identifierOfClass}Component_{Type}_g")
+                    .AppendLine("{");
 
-            builder.AppendLine($"[Inject] ICrudService<{identifierOfClass}> Service {{ get; set; }}");
+                builder.AppendLine($"[Inject] ICrudService<{identifierOfClass}> Service {{ get; set; }}");
 
-            builder.AppendLine($"private {identifierOfClass}[]? {GetListName(identifierOfClass)} {{ get; set; }}");
+                builder.AppendLine($"private {identifierOfClass}[]? {GetListName(identifierOfClass)} {{ get; set; }}");
 
-            builder.AppendLine("}");
+                builder.AppendLine("}");
 
         }
 
-        internal override void GenerateCodeBehind(ClassDeclarationSyntax classDeclaration, IndentedStringBuilder builder)
+        internal override void GenerateRazor(ClassDeclarationSyntax classDeclaration, IndentedStringBuilder builder)
         {
             NamespaceDeclarationSyntax namespaceDeclarationSyntax = null;
             if (!SyntaxNodeHelper.TryGetParentSyntax(classDeclaration, out namespaceDeclarationSyntax))

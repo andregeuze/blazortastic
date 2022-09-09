@@ -19,8 +19,8 @@ namespace Generator
 
             return
             (
-                new KeyValuePair<string, string>(Path.Combine(path, $"{identifierOfClass}Component.g.razor.cs"), pageBuilder.ToString()),
-                new KeyValuePair<string, string>(Path.Combine(path, $"{identifierOfClass}Component.g.razor"), codeBuilder.ToString())
+                new KeyValuePair<string, string>(Path.Combine(path, $"{identifierOfClass}Component.{Type}.g.razor.cs"), codeBuilder.ToString()),
+                new KeyValuePair<string, string>(Path.Combine(path, $"{identifierOfClass}Component.{Type}.g.razor"), pageBuilder.ToString())
             );
         }
 

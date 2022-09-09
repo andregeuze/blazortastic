@@ -62,6 +62,7 @@ namespace Generator
         {
             context.RegisterForSyntaxNotifications(() => new BlazorComponentAttributeSyntaxReceiver());
             _builders.Add(new OverviewPageBuilder());
+            _builders.Add(new CreateBuilder());
         }
     }
 }
