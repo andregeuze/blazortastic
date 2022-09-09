@@ -1,0 +1,27 @@
+@page "/createtestobjectje"
+@using Blazortastic.Data
+@using GeneratorHelper
+
+<PageTitle>Create Testobjectje</PageTitle>
+<EditForm Model="@model" OnValidSubmit="OnValidSubmit">
+    <MudGrid>
+        <MudItem xs="12" sm="7">
+            <MudCard>
+                <MudCardContent>
+                    <MudTextField T="string" Label="Name" @bind-Value="model.Name" />
+                </MudCardContent>
+                <MudCardActions>
+                    <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Class="ml-auto">Register</MudButton>
+                </MudCardActions>
+            </MudCard>
+        </MudItem>
+        <MudItem xs="12" sm="5">
+            <MudPaper Class="pa-4 mud-height-full">
+                @if (success)
+                {
+                    <MudText Color="Color.Success">Success</MudText>
+                }
+            </MudPaper>
+        </MudItem>
+    </MudGrid>
+</EditForm>

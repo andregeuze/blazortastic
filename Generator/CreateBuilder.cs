@@ -117,7 +117,7 @@ namespace Generator
 
                         using (builder.Indent())
                         {
-                            builder.AppendLine("@if (success)").AppendLine("}");
+                            builder.AppendLine("@if (success)").AppendLine("{");
 
                             using (builder.Indent())
                             {
