@@ -6,6 +6,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazortastic", "src\Blazort
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Generator", "Generator\Generator.csproj", "{801A61CA-42B8-4737-B2DA-E9E8E950A754}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeneratorHelper", "GeneratorHelper\GeneratorHelper.csproj", "{752F21D5-AA11-469D-9311-3E703634C6FB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,10 @@ Global
 		{801A61CA-42B8-4737-B2DA-E9E8E950A754}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{801A61CA-42B8-4737-B2DA-E9E8E950A754}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{801A61CA-42B8-4737-B2DA-E9E8E950A754}.Release|Any CPU.Build.0 = Release|Any CPU
+		{752F21D5-AA11-469D-9311-3E703634C6FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{752F21D5-AA11-469D-9311-3E703634C6FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{752F21D5-AA11-469D-9311-3E703634C6FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{752F21D5-AA11-469D-9311-3E703634C6FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
