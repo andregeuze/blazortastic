@@ -1,27 +1,27 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GeneratorHelper
 {
     public class BlazorComponentAttribute : Attribute
     {
-        public BlazorComponentAttribute() : this(true, true, true, true)
+        public BlazorComponentAttribute() : this(true, true, true, true, true)
         {
 
         }
 
-        public BlazorComponentAttribute(bool withCreate, bool withDelete, bool withEdit, bool withOverview)
+        public BlazorComponentAttribute(bool withCreate, bool withDelete, bool withEdit, bool withOverview, bool withDetails)
         {
-            WithCreate = withCreate;
-            WithDelete = withDelete;
-            WithEdit = withEdit;
-            WithOverview = withOverview;
+            WithCreate = withCreate ? "Create" : "DoNotCreate";
+            WithDelete = withDelete ? "Delete" : "DoNotDelete";
+            WithEdit = withEdit ? "Edit" : "DoNotEdit";
+            WithOverview = withOverview ? "Overview" : "DoNotOverview";
+            WithDetails = withDetails ? "Details" : "DoNotDetails";
         }
 
-        public bool WithCreate { get; }
-        public bool WithDelete { get; }
-        public bool WithEdit { get; }
-        public bool WithOverview { get; }
+        public string WithCreate { get; }
+        public string WithDelete { get; }
+        public string WithEdit { get; }
+        public string WithOverview { get; }
+        public string WithDetails { get; }
     }
 }

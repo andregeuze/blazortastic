@@ -1,6 +1,7 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
@@ -9,6 +10,8 @@ namespace Generator
     [Generator]
     public class RazorBlazorGenerator : ISourceGenerator
     {
+        private List<Builder> _builders = new List<Builder>();
+
         public void Execute(GeneratorExecutionContext context)
         {
             // Generating C# works:
@@ -27,25 +30,22 @@ namespace Generator
         void GenerateRazorComponent(BlazorComponentAttributeSyntaxReceiver syntaxReceiver)
         {
             var classesWithAttribute = syntaxReceiver.ClassesWithBlazorComponentAttribute;
-            
-            var directory = "Generated";
-            //Directory.CreateDirectory(directory); // Doesn't work, surprise surprise.
-            File.WriteAllText($"{directory}/TestComponent.razor", "<p>Hello Source Generated World!</p>");
+            foreach (var item in classesWithAttribute)
+            {
+                foreach(var builder in _builders)
+                {
+                    var generatedCode = builder.GetCode(item);
 
-            // Generate the Code behind of the component
-            var sourceText = new IndentedStringBuilder();
-            sourceText
-                .AppendLine($"namespace {directory};").AppendLine()
-                .AppendLine("public partial class TestComponent {").AppendLine()
-                .AppendLine("}");
-
-            File.WriteAllText($"{directory}/TestComponent.razor.cs", sourceText.ToString());
-
+                    File.WriteAllText(generatedCode.page.Key, generatedCode.page.Value);
+                    File.WriteAllText(generatedCode.code.Key, generatedCode.code.Value);
+                }
+            }
         }
 
         public void Initialize(GeneratorInitializationContext context)
         {
             context.RegisterForSyntaxNotifications(() => new BlazorComponentAttributeSyntaxReceiver());
+            _builders.Add(new OverviewPageBuilder());
         }
     }
 }
