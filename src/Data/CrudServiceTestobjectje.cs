@@ -4,6 +4,17 @@ namespace Blazortastic.Data
 {
     public class CrudServiceTestobjectje : ICrudService<Testobjectje>
     {
+        public List<Testobjectje> Testobjectjes { get; set; } = new()
+        {
+            new Testobjectje{ Name = "Victor" },
+            new Testobjectje{ Name = "And" },
+            new Testobjectje{ Name = "André" },
+            new Testobjectje{ Name = "Doing" },
+            new Testobjectje{ Name = "Epic" },
+            new Testobjectje{ Name = "Blazor" },
+            new Testobjectje{ Name = "SH*T" },
+        };
+
         public Task Delete(Guid id)
         {
             throw new NotImplementedException();
@@ -11,7 +22,7 @@ namespace Blazortastic.Data
 
         public Task<Testobjectje[]> GetAsync()
         {
-            throw new NotImplementedException();
+            return Task.FromResult(Testobjectjes.ToArray());
         }
 
         public Task<Testobjectje> GetById(Guid id)
@@ -21,7 +32,8 @@ namespace Blazortastic.Data
 
         public Task Post(Testobjectje entity)
         {
-            throw new NotImplementedException();
+            Testobjectjes.Add(entity);
+            return Task.CompletedTask;
         }
     }
 }
