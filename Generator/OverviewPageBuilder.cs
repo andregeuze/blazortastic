@@ -15,17 +15,23 @@ namespace Generator
             {
                 return; // or whatever you want to do in this scenario
             }
+
             var identifierOfClass = classDeclaration.Identifier.Value;
+
             builder
-                .AppendLine("namespace Generated;")
-                .AppendLine($"using {namespaceDeclarationSyntax.Name};")
-                .AppendLine($"public partial class {identifierOfClass}Component")
+                .AppendLine($"using GeneratorHelper;")
+                .AppendLine($"using Microsoft.AspNetCore.Components;").AppendLine()
+                .AppendLine($"namespace {namespaceDeclarationSyntax.Name};").AppendLine()
+                //.AppendLine($"using {namespaceDeclarationSyntax.Name};")
+                .AppendLine($"public partial class {identifierOfClass}Component_g")
                 .AppendLine("{");
 
-            builder.AppendLine($"private {identifierOfClass}[]? {GetListName(identifierOfClass)};");
+            builder.AppendLine($"[Inject] ICrudService<{identifierOfClass}> Service {{ get; set; }}");
+
+            builder.AppendLine($"private {identifierOfClass}[]? {GetListName(identifierOfClass)} {{ get; set; }}");
 
             builder.AppendLine("}");
-                
+
         }
 
         internal override void GenerateCodeBehind(ClassDeclarationSyntax classDeclaration, IndentedStringBuilder builder)
@@ -40,7 +46,6 @@ namespace Generator
                 .AppendLine($"@page \"/{identifierOfClass}\"")
                 .AppendLine($"@using {namespaceDeclarationSyntax.Name}")
                 .AppendLine($"@using GeneratorHelper")
-                .AppendLine($"@inject ICrudService<{identifierOfClass}> Service")
                 .AppendLine()
                 .AppendLine($"<PageTitle>{identifierOfClass}</PageTitle>")
                 .AppendLine($"<MudText Typo=\"Typo.h3\" GutterBottom=\"true\">{identifierOfClass}</MudText>")
@@ -69,7 +74,7 @@ namespace Generator
                     builder.AppendLine("<HeaderContent>");
                     using (builder.Indent())
                     {
-                        foreach(var property in properties)
+                        foreach (var property in properties)
                         {
                             builder.AppendLine($"<MudTh>{property.Identifier.Text}</MudTh>");
                         }
@@ -80,7 +85,7 @@ namespace Generator
 
                     using (builder.Indent())
                     {
-                        foreach(var property in properties)
+                        foreach (var property in properties)
                         {
                             builder.AppendLine($"<MudTd DataLabel=\"{property.Identifier.Text}\">@context.{property.Identifier.Text}</MudTd>");
                         }

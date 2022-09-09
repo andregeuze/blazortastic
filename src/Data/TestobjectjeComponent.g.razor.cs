@@ -1,6 +1,10 @@
-namespace Generated;
-using Blazortastic.Data;
-public partial class TestobjectjeComponent
+using GeneratorHelper;
+using Microsoft.AspNetCore.Components;
+
+namespace Blazortastic.Data;
+
+public partial class TestobjectjeComponent_g
 {
-public Testobjectje[]? TestobjectjeList;
+[Inject] ICrudService<Testobjectje> Service { get; set; }
+private Testobjectje[]? TestobjectjeList { get; set; }
 }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Hosting.StaticWebAssets;
 using Blazortastic.Data;
 using MudBlazor.Services;
+using GeneratorHelper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,9 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddMudServices();
+
+builder.Services.AddSingleton<ICrudService<Test>, CrudServiceTest>();
+builder.Services.AddSingleton<ICrudService<Testobjectje>, CrudServiceTestobjectje>();
 
 var app = builder.Build();
 

@@ -1,6 +1,10 @@
-namespace Generated;
-using Blazortastic.Data;
-public partial class TestComponent
+using GeneratorHelper;
+using Microsoft.AspNetCore.Components;
+
+namespace Blazortastic.Data;
+
+public partial class TestComponent_g
 {
-private Test[]? TestList;
+[Inject] ICrudService<Test> Service { get; set; }
+private Test[]? TestList { get; set; }
 }

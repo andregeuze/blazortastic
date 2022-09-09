@@ -10,7 +10,7 @@ namespace Generator
         {
             var identifierOfClass = classDeclaration.Identifier.Value.ToString();
 
-            builder.AppendLine($"<MudNavLink Href=\"{identifierOfClass.ToLowerInvariant()}\" Match=\"NavLinkMatch.Prefix\" Icon=\"@Icons.Material.Filled.List\">{identifierOfClass}</MudNavLink>\r\n");
+            builder.AppendLine($"<MudNavLink Href=\"{identifierOfClass.ToLowerInvariant()}\" Match=\"NavLinkMatch.Prefix\" Icon=\"@Icons.Material.Filled.List\">{identifierOfClass}</MudNavLink>");
         }
 
         internal override void GenerateRazor(ClassDeclarationSyntax classDeclaration, IndentedStringBuilder builder)

@@ -1,1 +1,19 @@
-<p>Hello Source Generated World!</p>
+@page "/Test"
+@using Blazortastic.Data
+@using GeneratorHelper
+
+<PageTitle>Test</PageTitle>
+<MudText Typo="Typo.h3" GutterBottom="true">Test</MudText>
+@if(TestList == null)
+{
+    <MudProgressCircular Color = "Color.Default" Indeterminate = "true" />
+}
+else
+{
+    <MudTable Items="TestList" Hover="true" Elevation="0">
+        <HeaderContent>
+        </HeaderContent>
+        <RowTemplate>
+        </RowTemplate>
+    </MudTable>
+}
