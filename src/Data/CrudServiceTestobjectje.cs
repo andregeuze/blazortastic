@@ -20,9 +20,10 @@ namespace Blazortastic.Data
             throw new NotImplementedException();
         }
 
-        public Task<Testobjectje[]> GetAsync()
+        public async Task<Testobjectje[]> GetAsync()
         {
-            return Task.FromResult(Testobjectjes.ToArray());
+            await ApplyFakeSlowApiEffect();
+            return Testobjectjes.ToArray();
         }
 
         public Task<Testobjectje> GetById(Guid id)
@@ -34,6 +35,11 @@ namespace Blazortastic.Data
         {
             Testobjectjes.Add(entity);
             return Task.CompletedTask;
+        }
+
+        Task ApplyFakeSlowApiEffect()
+        {
+            return Task.Delay(1000);
         }
     }
 }

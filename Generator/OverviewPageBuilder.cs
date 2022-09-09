@@ -1,6 +1,7 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Generator
 {
@@ -22,13 +23,26 @@ namespace Generator
                 .AppendLine($"using GeneratorHelper;")
                 .AppendLine($"using Microsoft.AspNetCore.Components;").AppendLine()
                 .AppendLine($"namespace {namespaceDeclarationSyntax.Name};").AppendLine()
-                //.AppendLine($"using {namespaceDeclarationSyntax.Name};")
                 .AppendLine($"public partial class {identifierOfClass}Component_g")
                 .AppendLine("{");
 
-            builder.AppendLine($"[Inject] ICrudService<{identifierOfClass}> Service {{ get; set; }}");
+            using (builder.Indent())
+            {
+                builder.AppendLine($"[Inject] ICrudService<{identifierOfClass}> Service {{ get; set; }}");
 
-            builder.AppendLine($"private {identifierOfClass}[]? {GetListName(identifierOfClass)} {{ get; set; }}");
+                builder.AppendLine($"private {identifierOfClass}[]? {GetListName(identifierOfClass)} {{ get; set; }}");
+
+                builder
+                    .AppendLine("protected override async Task OnInitializedAsync()")
+                    .AppendLine("{");
+
+                using (builder.Indent())
+                {
+                    builder.AppendLine($"{GetListName(identifierOfClass)} = await Service.GetAsync();");
+                }
+
+                builder.AppendLine("}");
+            }
 
             builder.AppendLine("}");
 
