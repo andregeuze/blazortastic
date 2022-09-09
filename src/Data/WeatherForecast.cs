@@ -2,7 +2,6 @@ using GeneratorHelper;
 
 namespace Blazortastic.Data
 {
-    [BlazorComponentAttribute]
     public class WeatherForecast
     {
         public DateTime Date { get; set; }
