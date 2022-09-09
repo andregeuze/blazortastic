@@ -12,7 +12,7 @@ namespace Blazortastic.Data
             new Testobjectje{ Name = "Doing" },
             new Testobjectje{ Name = "Epic" },
             new Testobjectje{ Name = "Blazor" },
-            new Testobjectje{ Name = "SH*T" },
+            new Testobjectje{ Name = "Sh💩t" },
         };
 
         public Task Delete(Guid id)
