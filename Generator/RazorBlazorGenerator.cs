@@ -2,6 +2,7 @@
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
 using System.IO;
+using System.Linq;
 
 namespace Generator
 {
@@ -18,11 +19,15 @@ namespace Generator
             // failed..
 
             // But what if we write to a file DIRECTLY
-            GenerateRazorComponent();
+            var receiver = (BlazorComponentAttributeSyntaxReceiver)context.SyntaxReceiver;
+
+            GenerateRazorComponent(receiver);
         }
 
-        void GenerateRazorComponent()
+        void GenerateRazorComponent(BlazorComponentAttributeSyntaxReceiver syntaxReceiver)
         {
+            var classesWithAttribute = syntaxReceiver.ClassesWithBlazorComponentAttribute;
+            
             var directory = "Generated";
             //Directory.CreateDirectory(directory); // Doesn't work, surprise surprise.
             File.WriteAllText($"{directory}/TestComponent.razor", "<p>Hello Source Generated World!</p>");
@@ -40,7 +45,7 @@ namespace Generator
 
         public void Initialize(GeneratorInitializationContext context)
         {
-
+            context.RegisterForSyntaxNotifications(() => new BlazorComponentAttributeSyntaxReceiver());
         }
     }
 }
